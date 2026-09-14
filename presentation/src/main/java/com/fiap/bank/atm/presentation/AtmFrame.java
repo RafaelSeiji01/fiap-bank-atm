@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class AtmFrame extends javax.swing.JFrame {
+public class AtmFrame extends JFrame {
 
     private final AtmService atmService;
     private ScreenState currentState;
@@ -742,380 +742,380 @@ public class AtmFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
+        GridBagConstraints gridBagConstraints;
 
-        jPanelMain = new javax.swing.JPanel();
-        jPanelHeader = new javax.swing.JPanel();
-        lblHeaderTitle = new javax.swing.JLabel();
-        jPanelCenterConsole = new javax.swing.JPanel();
-        jPanelLeftButtons = new javax.swing.JPanel();
-        btnLeft1 = new javax.swing.JButton();
-        btnLeft2 = new javax.swing.JButton();
-        btnLeft3 = new javax.swing.JButton();
-        jPanelRightButtons = new javax.swing.JPanel();
-        btnRight1 = new javax.swing.JButton();
-        btnRight2 = new javax.swing.JButton();
-        btnRight3 = new javax.swing.JButton();
-        jPanelScreen = new javax.swing.JPanel();
-        jPanelScreenHeader = new javax.swing.JPanel();
-        lblScreenHeader = new javax.swing.JLabel();
-        jPanelScreenCenter = new javax.swing.JPanel();
-        lblScreenStatus = new javax.swing.JLabel();
-        lblScreenInput = new javax.swing.JLabel();
-        lblScreenMessage = new javax.swing.JLabel();
-        jPanelScreenLeftLabels = new javax.swing.JPanel();
-        lblLeftOpt1 = new javax.swing.JLabel();
-        lblLeftOpt2 = new javax.swing.JLabel();
-        lblLeftOpt3 = new javax.swing.JLabel();
-        jPanelScreenRightLabels = new javax.swing.JPanel();
-        lblRightOpt1 = new javax.swing.JLabel();
-        lblRightOpt2 = new javax.swing.JLabel();
-        lblRightOpt3 = new javax.swing.JLabel();
-        jPanelBottomConsole = new javax.swing.JPanel();
-        jPanelKeypad = new javax.swing.JPanel();
-        btn1 = new javax.swing.JButton();
-        btn2 = new javax.swing.JButton();
-        btn3 = new javax.swing.JButton();
-        btn4 = new javax.swing.JButton();
-        btn5 = new javax.swing.JButton();
-        btn6 = new javax.swing.JButton();
-        btn7 = new javax.swing.JButton();
-        btn8 = new javax.swing.JButton();
-        btn9 = new javax.swing.JButton();
-        btnBlank = new javax.swing.JButton();
-        btn0 = new javax.swing.JButton();
-        btnC = new javax.swing.JButton();
-        jPanelPeripherals = new javax.swing.JPanel();
-        cardSlotContainer = new javax.swing.JPanel();
-        lblCardIndicatorLed = new javax.swing.JLabel();
-        receiptPrinterContainer = new javax.swing.JPanel();
-        lblPrinterStatus = new javax.swing.JLabel();
-        cashDispenserContainer = new javax.swing.JPanel();
-        lblCashDispenserStatus = new javax.swing.JLabel();
+        jPanelMain = new JPanel();
+        jPanelHeader = new JPanel();
+        lblHeaderTitle = new JLabel();
+        jPanelCenterConsole = new JPanel();
+        jPanelLeftButtons = new JPanel();
+        btnLeft1 = new JButton();
+        btnLeft2 = new JButton();
+        btnLeft3 = new JButton();
+        jPanelRightButtons = new JPanel();
+        btnRight1 = new JButton();
+        btnRight2 = new JButton();
+        btnRight3 = new JButton();
+        jPanelScreen = new JPanel();
+        jPanelScreenHeader = new JPanel();
+        lblScreenHeader = new JLabel();
+        jPanelScreenCenter = new JPanel();
+        lblScreenStatus = new JLabel();
+        lblScreenInput = new JLabel();
+        lblScreenMessage = new JLabel();
+        jPanelScreenLeftLabels = new JPanel();
+        lblLeftOpt1 = new JLabel();
+        lblLeftOpt2 = new JLabel();
+        lblLeftOpt3 = new JLabel();
+        jPanelScreenRightLabels = new JPanel();
+        lblRightOpt1 = new JLabel();
+        lblRightOpt2 = new JLabel();
+        lblRightOpt3 = new JLabel();
+        jPanelBottomConsole = new JPanel();
+        jPanelKeypad = new JPanel();
+        btn1 = new JButton();
+        btn2 = new JButton();
+        btn3 = new JButton();
+        btn4 = new JButton();
+        btn5 = new JButton();
+        btn6 = new JButton();
+        btn7 = new JButton();
+        btn8 = new JButton();
+        btn9 = new JButton();
+        btnBlank = new JButton();
+        btn0 = new JButton();
+        btnC = new JButton();
+        jPanelPeripherals = new JPanel();
+        cardSlotContainer = new JPanel();
+        lblCardIndicatorLed = new JLabel();
+        receiptPrinterContainer = new JPanel();
+        lblPrinterStatus = new JLabel();
+        cashDispenserContainer = new JPanel();
+        lblCashDispenserStatus = new JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("FIAP Bank - Caixa Eletrônico (ATM)");
         setResizable(false);
 
-        jPanelMain.setBackground(new java.awt.Color(19, 30, 43));
-        jPanelMain.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51), 8));
-        jPanelMain.setLayout(new java.awt.BorderLayout());
+        jPanelMain.setBackground(new Color(19, 30, 43));
+        jPanelMain.setBorder(BorderFactory.createLineBorder(new Color(51, 51, 51), 8));
+        jPanelMain.setLayout(new BorderLayout());
 
-        jPanelHeader.setBackground(new java.awt.Color(13, 20, 31));
-        jPanelHeader.setPreferredSize(new java.awt.Dimension(800, 80));
-        jPanelHeader.setLayout(new java.awt.GridBagLayout());
+        jPanelHeader.setBackground(new Color(13, 20, 31));
+        jPanelHeader.setPreferredSize(new Dimension(800, 80));
+        jPanelHeader.setLayout(new GridBagLayout());
 
-        lblHeaderTitle.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
-        lblHeaderTitle.setForeground(new java.awt.Color(241, 248, 252));
+        lblHeaderTitle.setFont(new Font("Segoe UI", 1, 28)); // NOI18N
+        lblHeaderTitle.setForeground(new Color(241, 248, 252));
         lblHeaderTitle.setText("FIAP BANK");
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = -1;
         gridBagConstraints.gridy = -1;
         jPanelHeader.add(lblHeaderTitle, gridBagConstraints);
 
-        jPanelMain.add(jPanelHeader, java.awt.BorderLayout.NORTH);
+        jPanelMain.add(jPanelHeader, BorderLayout.NORTH);
 
-        jPanelCenterConsole.setBackground(new java.awt.Color(19, 30, 43));
-        jPanelCenterConsole.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 40, 20, 40));
-        jPanelCenterConsole.setLayout(new java.awt.BorderLayout());
+        jPanelCenterConsole.setBackground(new Color(19, 30, 43));
+        jPanelCenterConsole.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
+        jPanelCenterConsole.setLayout(new BorderLayout());
 
-        jPanelLeftButtons.setBackground(new java.awt.Color(19, 30, 43));
-        jPanelLeftButtons.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 0, 20, 15));
-        jPanelLeftButtons.setPreferredSize(new java.awt.Dimension(100, 300));
-        jPanelLeftButtons.setLayout(new java.awt.GridLayout(3, 1, 0, 35));
+        jPanelLeftButtons.setBackground(new Color(19, 30, 43));
+        jPanelLeftButtons.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 15));
+        jPanelLeftButtons.setPreferredSize(new Dimension(100, 300));
+        jPanelLeftButtons.setLayout(new GridLayout(3, 1, 0, 35));
 
-        btnLeft1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnLeft1.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
         btnLeft1.setText("[ ]");
         jPanelLeftButtons.add(btnLeft1);
 
-        btnLeft2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnLeft2.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
         btnLeft2.setText("[ ]");
         jPanelLeftButtons.add(btnLeft2);
 
-        btnLeft3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnLeft3.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
         btnLeft3.setText("[ ]");
         jPanelLeftButtons.add(btnLeft3);
 
-        jPanelCenterConsole.add(jPanelLeftButtons, java.awt.BorderLayout.WEST);
+        jPanelCenterConsole.add(jPanelLeftButtons, BorderLayout.WEST);
 
-        jPanelRightButtons.setBackground(new java.awt.Color(19, 30, 43));
-        jPanelRightButtons.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 15, 0, 0));
-        jPanelRightButtons.setPreferredSize(new java.awt.Dimension(100, 300));
-        jPanelRightButtons.setLayout(new java.awt.GridLayout(3, 1, 0, 35));
+        jPanelRightButtons.setBackground(new Color(19, 30, 43));
+        jPanelRightButtons.setBorder(BorderFactory.createEmptyBorder(20, 15, 0, 0));
+        jPanelRightButtons.setPreferredSize(new Dimension(100, 300));
+        jPanelRightButtons.setLayout(new GridLayout(3, 1, 0, 35));
 
-        btnRight1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRight1.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
         btnRight1.setText("[ ]");
         jPanelRightButtons.add(btnRight1);
 
-        btnRight2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRight2.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
         btnRight2.setText("[ ]");
         jPanelRightButtons.add(btnRight2);
 
-        btnRight3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRight3.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
         btnRight3.setText("[ ]");
         jPanelRightButtons.add(btnRight3);
 
-        jPanelCenterConsole.add(jPanelRightButtons, java.awt.BorderLayout.EAST);
+        jPanelCenterConsole.add(jPanelRightButtons, BorderLayout.EAST);
 
-        jPanelScreen.setBackground(new java.awt.Color(11, 18, 28));
-        jPanelScreen.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(43, 56, 77), 4, true));
-        jPanelScreen.setLayout(new java.awt.BorderLayout());
+        jPanelScreen.setBackground(new Color(11, 18, 28));
+        jPanelScreen.setBorder(new LineBorder(new Color(43, 56, 77), 4, true));
+        jPanelScreen.setLayout(new BorderLayout());
 
-        jPanelScreenHeader.setBackground(new java.awt.Color(11, 18, 28));
-        jPanelScreenHeader.setPreferredSize(new java.awt.Dimension(500, 45));
+        jPanelScreenHeader.setBackground(new Color(11, 18, 28));
+        jPanelScreenHeader.setPreferredSize(new Dimension(500, 45));
 
-        lblScreenHeader.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
-        lblScreenHeader.setForeground(new java.awt.Color(254, 240, 138));
+        lblScreenHeader.setFont(new Font("Monospaced", 1, 18)); // NOI18N
+        lblScreenHeader.setForeground(new Color(254, 240, 138));
         lblScreenHeader.setText("--- ATM FIAP BANK ---");
         jPanelScreenHeader.add(lblScreenHeader);
 
-        jPanelScreen.add(jPanelScreenHeader, java.awt.BorderLayout.NORTH);
+        jPanelScreen.add(jPanelScreenHeader, BorderLayout.NORTH);
 
-        jPanelScreenCenter.setBackground(new java.awt.Color(11, 18, 28));
-        jPanelScreenCenter.setLayout(new java.awt.GridLayout(3, 1));
+        jPanelScreenCenter.setBackground(new Color(11, 18, 28));
+        jPanelScreenCenter.setLayout(new GridLayout(3, 1));
 
-        lblScreenStatus.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        lblScreenStatus.setForeground(new java.awt.Color(241, 245, 249));
-        lblScreenStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblScreenStatus.setFont(new Font("Monospaced", 1, 14)); // NOI18N
+        lblScreenStatus.setForeground(new Color(241, 245, 249));
+        lblScreenStatus.setHorizontalAlignment(SwingConstants.CENTER);
         lblScreenStatus.setText("INSIRA SEU CARTÃO OU CONTA");
         jPanelScreenCenter.add(lblScreenStatus);
 
-        lblScreenInput.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
-        lblScreenInput.setForeground(new java.awt.Color(56, 189, 248));
-        lblScreenInput.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblScreenInput.setFont(new Font("Monospaced", 1, 24)); // NOI18N
+        lblScreenInput.setForeground(new Color(56, 189, 248));
+        lblScreenInput.setHorizontalAlignment(SwingConstants.CENTER);
         lblScreenInput.setText("_");
         jPanelScreenCenter.add(lblScreenInput);
 
-        lblScreenMessage.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        lblScreenMessage.setForeground(new java.awt.Color(234, 113, 113));
-        lblScreenMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblScreenMessage.setFont(new Font("Monospaced", 0, 12)); // NOI18N
+        lblScreenMessage.setForeground(new Color(234, 113, 113));
+        lblScreenMessage.setHorizontalAlignment(SwingConstants.CENTER);
         lblScreenMessage.setText(" ");
         jPanelScreenCenter.add(lblScreenMessage);
 
-        jPanelScreen.add(jPanelScreenCenter, java.awt.BorderLayout.CENTER);
+        jPanelScreen.add(jPanelScreenCenter, BorderLayout.CENTER);
 
-        jPanelScreenLeftLabels.setBackground(new java.awt.Color(11, 18, 28));
-        jPanelScreenLeftLabels.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 10, 20, 0));
-        jPanelScreenLeftLabels.setPreferredSize(new java.awt.Dimension(130, 200));
-        jPanelScreenLeftLabels.setLayout(new java.awt.GridLayout(3, 1, 0, 35));
+        jPanelScreenLeftLabels.setBackground(new Color(11, 18, 28));
+        jPanelScreenLeftLabels.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 0));
+        jPanelScreenLeftLabels.setPreferredSize(new Dimension(130, 200));
+        jPanelScreenLeftLabels.setLayout(new GridLayout(3, 1, 0, 35));
 
-        lblLeftOpt1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        lblLeftOpt1.setForeground(new java.awt.Color(56, 189, 248));
+        lblLeftOpt1.setFont(new Font("Monospaced", 1, 14)); // NOI18N
+        lblLeftOpt1.setForeground(new Color(56, 189, 248));
         lblLeftOpt1.setText(" ");
         jPanelScreenLeftLabels.add(lblLeftOpt1);
 
-        lblLeftOpt2.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        lblLeftOpt2.setForeground(new java.awt.Color(56, 189, 248));
+        lblLeftOpt2.setFont(new Font("Monospaced", 1, 14)); // NOI18N
+        lblLeftOpt2.setForeground(new Color(56, 189, 248));
         lblLeftOpt2.setText(" ");
         jPanelScreenLeftLabels.add(lblLeftOpt2);
 
-        lblLeftOpt3.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        lblLeftOpt3.setForeground(new java.awt.Color(56, 189, 248));
+        lblLeftOpt3.setFont(new Font("Monospaced", 1, 14)); // NOI18N
+        lblLeftOpt3.setForeground(new Color(56, 189, 248));
         lblLeftOpt3.setText(" ");
         jPanelScreenLeftLabels.add(lblLeftOpt3);
 
-        jPanelScreen.add(jPanelScreenLeftLabels, java.awt.BorderLayout.WEST);
+        jPanelScreen.add(jPanelScreenLeftLabels, BorderLayout.WEST);
 
-        jPanelScreenRightLabels.setBackground(new java.awt.Color(11, 18, 28));
-        jPanelScreenRightLabels.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 0, 20, 10));
-        jPanelScreenRightLabels.setPreferredSize(new java.awt.Dimension(130, 200));
-        jPanelScreenRightLabels.setLayout(new java.awt.GridLayout(3, 1, 0, 35));
+        jPanelScreenRightLabels.setBackground(new Color(11, 18, 28));
+        jPanelScreenRightLabels.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 10));
+        jPanelScreenRightLabels.setPreferredSize(new Dimension(130, 200));
+        jPanelScreenRightLabels.setLayout(new GridLayout(3, 1, 0, 35));
 
-        lblRightOpt1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        lblRightOpt1.setForeground(new java.awt.Color(56, 189, 248));
-        lblRightOpt1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblRightOpt1.setFont(new Font("Monospaced", 1, 14)); // NOI18N
+        lblRightOpt1.setForeground(new Color(56, 189, 248));
+        lblRightOpt1.setHorizontalAlignment(SwingConstants.RIGHT);
         lblRightOpt1.setText(" ");
         jPanelScreenRightLabels.add(lblRightOpt1);
 
-        lblRightOpt2.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        lblRightOpt2.setForeground(new java.awt.Color(56, 189, 248));
-        lblRightOpt2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblRightOpt2.setFont(new Font("Monospaced", 1, 14)); // NOI18N
+        lblRightOpt2.setForeground(new Color(56, 189, 248));
+        lblRightOpt2.setHorizontalAlignment(SwingConstants.RIGHT);
         lblRightOpt2.setText(" ");
         jPanelScreenRightLabels.add(lblRightOpt2);
 
-        lblRightOpt3.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        lblRightOpt3.setForeground(new java.awt.Color(56, 189, 248));
-        lblRightOpt3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblRightOpt3.setFont(new Font("Monospaced", 1, 14)); // NOI18N
+        lblRightOpt3.setForeground(new Color(56, 189, 248));
+        lblRightOpt3.setHorizontalAlignment(SwingConstants.RIGHT);
         lblRightOpt3.setText(" ");
         jPanelScreenRightLabels.add(lblRightOpt3);
 
-        jPanelScreen.add(jPanelScreenRightLabels, java.awt.BorderLayout.EAST);
+        jPanelScreen.add(jPanelScreenRightLabels, BorderLayout.EAST);
 
-        jPanelCenterConsole.add(jPanelScreen, java.awt.BorderLayout.CENTER);
+        jPanelCenterConsole.add(jPanelScreen, BorderLayout.CENTER);
 
-        jPanelMain.add(jPanelCenterConsole, java.awt.BorderLayout.CENTER);
+        jPanelMain.add(jPanelCenterConsole, BorderLayout.CENTER);
 
-        jPanelBottomConsole.setBackground(new java.awt.Color(13, 20, 31));
-        jPanelBottomConsole.setBorder(javax.swing.BorderFactory.createTitledBorder(
-                javax.swing.BorderFactory.createLineBorder(new java.awt.Color(85, 85, 85), 2), "CONSOLE DO OPERADOR",
+        jPanelBottomConsole.setBackground(new Color(13, 20, 31));
+        jPanelBottomConsole.setBorder(BorderFactory.createTitledBorder(
+                BorderFactory.createLineBorder(new Color(85, 85, 85), 2), "CONSOLE DO OPERADOR",
                 javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION,
-                new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(170, 170, 170))); // NOI18N
-        jPanelBottomConsole.setPreferredSize(new java.awt.Dimension(800, 360));
-        jPanelBottomConsole.setLayout(new java.awt.GridLayout(1, 2, 30, 0));
+                new Font("Segoe UI", 1, 12), new Color(170, 170, 170))); // NOI18N
+        jPanelBottomConsole.setPreferredSize(new Dimension(800, 360));
+        jPanelBottomConsole.setLayout(new GridLayout(1, 2, 30, 0));
 
-        jPanelKeypad.setBackground(new java.awt.Color(13, 20, 31));
-        jPanelKeypad.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 30, 15, 15));
-        jPanelKeypad.setLayout(new java.awt.GridLayout(4, 3, 10, 10));
+        jPanelKeypad.setBackground(new Color(13, 20, 31));
+        jPanelKeypad.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 15));
+        jPanelKeypad.setLayout(new GridLayout(4, 3, 10, 10));
 
-        btn1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        btn1.setFont(new Font("Segoe UI", 1, 20)); // NOI18N
         btn1.setText("1");
         jPanelKeypad.add(btn1);
 
-        btn2.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        btn2.setFont(new Font("Segoe UI", 1, 20)); // NOI18N
         btn2.setText("2");
         jPanelKeypad.add(btn2);
 
-        btn3.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        btn3.setFont(new Font("Segoe UI", 1, 20)); // NOI18N
         btn3.setText("3");
         jPanelKeypad.add(btn3);
 
-        btn4.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        btn4.setFont(new Font("Segoe UI", 1, 20)); // NOI18N
         btn4.setText("4");
         jPanelKeypad.add(btn4);
 
-        btn5.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        btn5.setFont(new Font("Segoe UI", 1, 20)); // NOI18N
         btn5.setText("5");
         jPanelKeypad.add(btn5);
 
-        btn6.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        btn6.setFont(new Font("Segoe UI", 1, 20)); // NOI18N
         btn6.setText("6");
         jPanelKeypad.add(btn6);
 
-        btn7.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        btn7.setFont(new Font("Segoe UI", 1, 20)); // NOI18N
         btn7.setText("7");
         jPanelKeypad.add(btn7);
 
-        btn8.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        btn8.setFont(new Font("Segoe UI", 1, 20)); // NOI18N
         btn8.setText("8");
         jPanelKeypad.add(btn8);
 
-        btn9.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        btn9.setFont(new Font("Segoe UI", 1, 20)); // NOI18N
         btn9.setText("9");
         jPanelKeypad.add(btn9);
 
-        btnBlank.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnBlank.setFont(new Font("Segoe UI", 0, 14)); // NOI18N
         btnBlank.setText("Cartão");
         jPanelKeypad.add(btnBlank);
 
-        btn0.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        btn0.setFont(new Font("Segoe UI", 1, 20)); // NOI18N
         btn0.setText("0");
         jPanelKeypad.add(btn0);
 
-        btnC.setBackground(new java.awt.Color(189, 58, 58));
-        btnC.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        btnC.setForeground(new java.awt.Color(255, 255, 255));
+        btnC.setBackground(new Color(189, 58, 58));
+        btnC.setFont(new Font("Segoe UI", 1, 20)); // NOI18N
+        btnC.setForeground(new Color(255, 255, 255));
         btnC.setText("C");
         jPanelKeypad.add(btnC);
 
         jPanelBottomConsole.add(jPanelKeypad);
 
-        jPanelPeripherals.setBackground(new java.awt.Color(13, 20, 31));
-        jPanelPeripherals.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 30, 30));
-        jPanelPeripherals.setLayout(new java.awt.GridLayout(3, 1, 0, 15));
+        jPanelPeripherals.setBackground(new Color(13, 20, 31));
+        jPanelPeripherals.setBorder(BorderFactory.createEmptyBorder(15, 15, 30, 30));
+        jPanelPeripherals.setLayout(new GridLayout(3, 1, 0, 15));
 
-        cardSlotContainer.setBackground(new java.awt.Color(18, 27, 38));
-        cardSlotContainer.setBorder(javax.swing.BorderFactory.createTitledBorder(
-                javax.swing.BorderFactory.createLineBorder(new java.awt.Color(38, 52, 71), 2), "ENTRADA DE CARTÃO",
+        cardSlotContainer.setBackground(new Color(18, 27, 38));
+        cardSlotContainer.setBorder(BorderFactory.createTitledBorder(
+                BorderFactory.createLineBorder(new Color(38, 52, 71), 2), "ENTRADA DE CARTÃO",
                 javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION,
-                new java.awt.Font("Segoe UI", 1, 10), new java.awt.Color(153, 153, 153))); // NOI18N
-        cardSlotContainer.setLayout(new java.awt.BorderLayout());
+                new Font("Segoe UI", 1, 10), new Color(153, 153, 153))); // NOI18N
+        cardSlotContainer.setLayout(new BorderLayout());
 
-        lblCardIndicatorLed.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblCardIndicatorLed.setForeground(new java.awt.Color(80, 200, 80));
-        lblCardIndicatorLed.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCardIndicatorLed.setFont(new Font("Segoe UI", 1, 12)); // NOI18N
+        lblCardIndicatorLed.setForeground(new Color(80, 200, 80));
+        lblCardIndicatorLed.setHorizontalAlignment(SwingConstants.CENTER);
         lblCardIndicatorLed.setText("● AGUARDANDO CARTÃO");
-        cardSlotContainer.add(lblCardIndicatorLed, java.awt.BorderLayout.CENTER);
+        cardSlotContainer.add(lblCardIndicatorLed, BorderLayout.CENTER);
 
         jPanelPeripherals.add(cardSlotContainer);
 
-        receiptPrinterContainer.setBackground(new java.awt.Color(18, 27, 38));
-        receiptPrinterContainer.setBorder(javax.swing.BorderFactory.createTitledBorder(
-                javax.swing.BorderFactory.createLineBorder(new java.awt.Color(38, 52, 71), 2), "IMPRESSORA DE EXTRATO",
+        receiptPrinterContainer.setBackground(new Color(18, 27, 38));
+        receiptPrinterContainer.setBorder(BorderFactory.createTitledBorder(
+                BorderFactory.createLineBorder(new Color(38, 52, 71), 2), "IMPRESSORA DE EXTRATO",
                 javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION,
-                new java.awt.Font("Segoe UI", 1, 10), new java.awt.Color(153, 153, 153))); // NOI18N
-        receiptPrinterContainer.setLayout(new java.awt.BorderLayout());
+                new Font("Segoe UI", 1, 10), new Color(153, 153, 153))); // NOI18N
+        receiptPrinterContainer.setLayout(new BorderLayout());
 
-        lblPrinterStatus.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblPrinterStatus.setForeground(new java.awt.Color(204, 204, 204));
-        lblPrinterStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPrinterStatus.setFont(new Font("Segoe UI", 1, 12)); // NOI18N
+        lblPrinterStatus.setForeground(new Color(204, 204, 204));
+        lblPrinterStatus.setHorizontalAlignment(SwingConstants.CENTER);
         lblPrinterStatus.setText("PRONTA");
-        receiptPrinterContainer.add(lblPrinterStatus, java.awt.BorderLayout.CENTER);
+        receiptPrinterContainer.add(lblPrinterStatus, BorderLayout.CENTER);
 
         jPanelPeripherals.add(receiptPrinterContainer);
 
-        cashDispenserContainer.setBackground(new java.awt.Color(18, 27, 38));
-        cashDispenserContainer.setBorder(javax.swing.BorderFactory.createTitledBorder(
-                javax.swing.BorderFactory.createLineBorder(new java.awt.Color(38, 52, 71), 2), "DISPENSADOR DE CÉDULAS",
+        cashDispenserContainer.setBackground(new Color(18, 27, 38));
+        cashDispenserContainer.setBorder(BorderFactory.createTitledBorder(
+                BorderFactory.createLineBorder(new Color(38, 52, 71), 2), "DISPENSADOR DE CÉDULAS",
                 javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION,
-                new java.awt.Font("Segoe UI", 1, 10), new java.awt.Color(153, 153, 153))); // NOI18N
-        cashDispenserContainer.setLayout(new java.awt.BorderLayout());
+                new Font("Segoe UI", 1, 10), new Color(153, 153, 153))); // NOI18N
+        cashDispenserContainer.setLayout(new BorderLayout());
 
-        lblCashDispenserStatus.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblCashDispenserStatus.setForeground(new java.awt.Color(153, 153, 153));
-        lblCashDispenserStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCashDispenserStatus.setFont(new Font("Segoe UI", 1, 12)); // NOI18N
+        lblCashDispenserStatus.setForeground(new Color(153, 153, 153));
+        lblCashDispenserStatus.setHorizontalAlignment(SwingConstants.CENTER);
         lblCashDispenserStatus.setText("FECHADO");
-        cashDispenserContainer.add(lblCashDispenserStatus, java.awt.BorderLayout.CENTER);
+        cashDispenserContainer.add(lblCashDispenserStatus, BorderLayout.CENTER);
 
         jPanelPeripherals.add(cashDispenserContainer);
 
         jPanelBottomConsole.add(jPanelPeripherals);
 
-        jPanelMain.add(jPanelBottomConsole, java.awt.BorderLayout.SOUTH);
+        jPanelMain.add(jPanelBottomConsole, BorderLayout.SOUTH);
 
-        getContentPane().add(jPanelMain, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jPanelMain, BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(816, 839));
+        setSize(new Dimension(816, 839));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn0;
-    private javax.swing.JButton btn1;
-    private javax.swing.JButton btn2;
-    private javax.swing.JButton btn3;
-    private javax.swing.JButton btn4;
-    private javax.swing.JButton btn5;
-    private javax.swing.JButton btn6;
-    private javax.swing.JButton btn7;
-    private javax.swing.JButton btn8;
-    private javax.swing.JButton btn9;
-    private javax.swing.JButton btnBlank;
-    private javax.swing.JButton btnC;
-    private javax.swing.JButton btnLeft1;
-    private javax.swing.JButton btnLeft2;
-    private javax.swing.JButton btnLeft3;
-    private javax.swing.JButton btnRight1;
-    private javax.swing.JButton btnRight2;
-    private javax.swing.JButton btnRight3;
-    private javax.swing.JPanel cardSlotContainer;
-    private javax.swing.JPanel cashDispenserContainer;
-    private javax.swing.JPanel jPanelBottomConsole;
-    private javax.swing.JPanel jPanelCenterConsole;
-    private javax.swing.JPanel jPanelHeader;
-    private javax.swing.JPanel jPanelKeypad;
-    private javax.swing.JPanel jPanelLeftButtons;
-    private javax.swing.JPanel jPanelMain;
-    private javax.swing.JPanel jPanelPeripherals;
-    private javax.swing.JPanel jPanelRightButtons;
-    private javax.swing.JPanel jPanelScreen;
-    private javax.swing.JPanel jPanelScreenCenter;
-    private javax.swing.JPanel jPanelScreenHeader;
-    private javax.swing.JPanel jPanelScreenLeftLabels;
-    private javax.swing.JPanel jPanelScreenRightLabels;
-    private javax.swing.JLabel lblCardIndicatorLed;
-    private javax.swing.JLabel lblCashDispenserStatus;
-    private javax.swing.JLabel lblHeaderTitle;
-    private javax.swing.JLabel lblLeftOpt1;
-    private javax.swing.JLabel lblLeftOpt2;
-    private javax.swing.JLabel lblLeftOpt3;
-    private javax.swing.JLabel lblPrinterStatus;
-    private javax.swing.JLabel lblRightOpt1;
-    private javax.swing.JLabel lblRightOpt2;
-    private javax.swing.JLabel lblRightOpt3;
-    private javax.swing.JLabel lblScreenHeader;
-    private javax.swing.JLabel lblScreenInput;
-    private javax.swing.JLabel lblScreenMessage;
-    private javax.swing.JLabel lblScreenStatus;
-    private javax.swing.JPanel receiptPrinterContainer;
+    private JButton btn0;
+    private JButton btn1;
+    private JButton btn2;
+    private JButton btn3;
+    private JButton btn4;
+    private JButton btn5;
+    private JButton btn6;
+    private JButton btn7;
+    private JButton btn8;
+    private JButton btn9;
+    private JButton btnBlank;
+    private JButton btnC;
+    private JButton btnLeft1;
+    private JButton btnLeft2;
+    private JButton btnLeft3;
+    private JButton btnRight1;
+    private JButton btnRight2;
+    private JButton btnRight3;
+    private JPanel cardSlotContainer;
+    private JPanel cashDispenserContainer;
+    private JPanel jPanelBottomConsole;
+    private JPanel jPanelCenterConsole;
+    private JPanel jPanelHeader;
+    private JPanel jPanelKeypad;
+    private JPanel jPanelLeftButtons;
+    private JPanel jPanelMain;
+    private JPanel jPanelPeripherals;
+    private JPanel jPanelRightButtons;
+    private JPanel jPanelScreen;
+    private JPanel jPanelScreenCenter;
+    private JPanel jPanelScreenHeader;
+    private JPanel jPanelScreenLeftLabels;
+    private JPanel jPanelScreenRightLabels;
+    private JLabel lblCardIndicatorLed;
+    private JLabel lblCashDispenserStatus;
+    private JLabel lblHeaderTitle;
+    private JLabel lblLeftOpt1;
+    private JLabel lblLeftOpt2;
+    private JLabel lblLeftOpt3;
+    private JLabel lblPrinterStatus;
+    private JLabel lblRightOpt1;
+    private JLabel lblRightOpt2;
+    private JLabel lblRightOpt3;
+    private JLabel lblScreenHeader;
+    private JLabel lblScreenInput;
+    private JLabel lblScreenMessage;
+    private JLabel lblScreenStatus;
+    private JPanel receiptPrinterContainer;
     // End of variables declaration//GEN-END:variables
 }
