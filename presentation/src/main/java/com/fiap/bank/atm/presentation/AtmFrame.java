@@ -1,7 +1,7 @@
 package com.fiap.bank.atm.presentation;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import com.fiap.bank.atm.application.service.AtmService;
+import com.fiap.bank.atm.application.AtmService;
 import com.fiap.bank.atm.domain.exception.AccountBlockedException;
 import com.fiap.bank.atm.domain.exception.DailyLimitExceededException;
 import com.fiap.bank.atm.domain.exception.InsufficientFundsException;

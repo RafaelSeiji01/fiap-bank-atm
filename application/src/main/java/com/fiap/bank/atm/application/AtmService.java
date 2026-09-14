@@ -1,4 +1,4 @@
-package fiap.bank.atm.application.service;
+package com.fiap.bank.atm.application;
 
 import com.fiap.bank.atm.domain.exception.InvalidPinException;
 import com.fiap.bank.atm.domain.model.Account;
