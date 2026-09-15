@@ -1,7 +1,7 @@
 package com.fiap.bank.atm.application;
 
 import com.fiap.bank.atm.domain.repository.AccountRepository;
-import com.fiap.bank.atm.infrastructure.persistence.InMemoryAccountRepository;
+import com.fiap.bank.atm.infrastructure.persistence.AccountRepositoryJdbcImpl;
 
 /**
  * Fábrica de composição: monta o AtmService com sua implementação concreta de
@@ -14,7 +14,7 @@ public final class AtmServiceFactory {
     }
 
     public static AtmService createDefault() {
-        AccountRepository accountRepository = new InMemoryAccountRepository();
+        AccountRepository accountRepository = new AccountRepositoryJdbcImpl();
         return new AtmService(accountRepository);
     }
 }
