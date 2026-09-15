@@ -20,6 +20,14 @@
             <artifactId>domain</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!-- Necessário apenas para a fábrica de composição (AtmServiceFactory)
+             instanciar a implementação concreta do repositório sem que a
+             camada de apresentação precise depender de infrastructure. -->
+        <dependency>
+            <groupId>com.fiap.bank</groupId>
+            <artifactId>infrastructure</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

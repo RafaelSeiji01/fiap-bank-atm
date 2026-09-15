@@ -4,7 +4,6 @@ import com.fiap.bank.atm.application.dto.TransactionDTO;
 import com.fiap.bank.atm.domain.exception.InvalidPinException;
 import com.fiap.bank.atm.domain.model.Account;
 import com.fiap.bank.atm.domain.model.Money;
-import com.fiap.bank.atm.domain.model.Transaction;
 import com.fiap.bank.atm.domain.repository.AccountRepository;
 //iport para o dto e nao vazr o account
 import com.fiap.bank.atm.application.dto.AccountInfoDTO;
@@ -70,16 +69,6 @@ public class AtmService {
 
         accountRepository.salvar(currentAccount);
         accountRepository.salvar(targetAccount);
-    }
-
-    public Money getBalance() {
-        ensureAuthenticated();
-        return currentAccount.getBalance();
-    }
-
-    public List<Transaction> getStatement() {
-        ensureAuthenticated();
-        return currentAccount.getTransactions();
     }
 
     public void logout() {

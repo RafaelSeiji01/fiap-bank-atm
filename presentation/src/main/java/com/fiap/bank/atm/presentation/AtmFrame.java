@@ -6,9 +6,8 @@ import com.fiap.bank.atm.domain.exception.AccountBlockedException;
 import com.fiap.bank.atm.domain.exception.DailyLimitExceededException;
 import com.fiap.bank.atm.domain.exception.InsufficientFundsException;
 import com.fiap.bank.atm.domain.exception.InvalidPinException;
-import com.fiap.bank.atm.domain.model.Account;
 import com.fiap.bank.atm.application.dto.AccountInfoDTO;
-import com.fiap.bank.atm.domain.model.Transaction;
+import com.fiap.bank.atm.application.dto.TransactionDTO;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -503,7 +502,7 @@ public class AtmFrame extends JFrame {
     }
 
     private void showVirtualReceipt() {
-        Account acc = atmService.getCurrentAccount();
+        AccountInfoDTO acc = atmService.getCurrentAccount();
         if (acc == null)
             return;
 
@@ -512,25 +511,25 @@ public class AtmFrame extends JFrame {
         sb.append("               FIAP BANK                \n");
         sb.append("        COMPROVANTE DE EXTRATO          \n");
         sb.append("========================================\n");
-        sb.append("CONTA: ").append(acc.getAccountNumber()).append("\n");
+        sb.append("CONTA: ").append(acc.accountNumber()).append("\n");
         sb.append("DATA: ").append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")))
                 .append("\n");
         sb.append("----------------------------------------\n");
 
-        List<Transaction> txs = acc.getTransactions();
+        List<TransactionDTO> txs = acc.statement();
         int count = 0;
         // Pega as últimas 5 transações
         for (int i = txs.size() - 1; i >= 0 && count < 5; i--) {
-            Transaction tx = txs.get(i);
+            TransactionDTO tx = txs.get(i);
             sb.append(String.format("%-12s %-14s %12s\n",
-                    tx.getTimestamp().format(DateTimeFormatter.ofPattern("dd/MM HH:mm")),
-                    tx.getType().getDescription(),
-                    tx.getAmount().format()));
+                    tx.date(),
+                    tx.description(),
+                    tx.formattedAmount()));
             count++;
         }
 
         sb.append("----------------------------------------\n");
-        sb.append("SALDO ATUAL: ").append(acc.getBalance().format()).append("\n");
+        sb.append("SALDO ATUAL: ").append(acc.balance()).append("\n");
         sb.append("========================================\n");
         sb.append("        OBRIGADO POR UTILIZAR           \n");
         sb.append("             FIAP BANK                  \n");
@@ -612,9 +611,9 @@ public class AtmFrame extends JFrame {
                 break;
 
             case MAIN_MENU:
-                Account currentAcc = atmService.getCurrentAccount();
+                AccountInfoDTO currentAcc = atmService.getCurrentAccount();
                 lblScreenHeader.setText("--- MENU PRINCIPAL ---");
-                lblScreenStatus.setText("CONTA ATIVA: " + (currentAcc != null ? currentAcc.getAccountNumber() : ""));
+                lblScreenStatus.setText("CONTA ATIVA: " + (currentAcc != null ? currentAcc.accountNumber() : ""));
                 lblScreenInput.setText("SELECIONE A OPERAÇÃO");
 
                 lblLeftOpt1.setText("> SACAR");
@@ -676,15 +675,12 @@ public class AtmFrame extends JFrame {
                 break;
 
             case SHOW_BALANCE:
-                Account balanceAcc = atmService.getCurrentAccount();
+                AccountInfoDTO balanceAcc = atmService.getCurrentAccount();
                 lblScreenHeader.setText("--- CONSULTA DE SALDO ---");
                 lblScreenStatus.setText("SALDO DISPONÍVEL");
-                lblScreenInput.setText(balanceAcc != null ? balanceAcc.getBalance().format() : "R$ 0,00");
+                lblScreenInput.setText(balanceAcc != null ? balanceAcc.balance() : "R$ 0,00");
                 lblScreenMessage.setText("Limite Diário Restante: " +
-                        (balanceAcc != null
-                                ? balanceAcc.getDailyWithdrawalLimit().minus(balanceAcc.getTotalWithdrawnToday())
-                                        .format()
-                                : "R$ 0,00"));
+                        (balanceAcc != null ? balanceAcc.dailyLimitRemaining() : "R$ 0,00"));
                 lblRightOpt3.setText("VOLTAR <");
                 btnBlank.setText("");
                 break;

@@ -1,14 +1,14 @@
 package com.fiap.bank.atm.presentation;
 
 import com.fiap.bank.atm.application.AtmService;
+import com.fiap.bank.atm.application.AtmServiceFactory;
 import javax.swing.SwingUtilities;
 
 public class AtmApplication {
     public static void main(String[] args) {
-        // Inicializa as camadas de Infraestrutura e Aplicação (DDD)
-        //AccountRepository accountRepository = new InMemoryAccountRepository();
-        //AtmService atmService = new AtmService(accountRepository);
-        AtmService atmService = null;
+        // A camada de apresentação só enxerga a camada de aplicação; a fábrica
+        // é quem sabe montar a implementação concreta do repositório.
+        AtmService atmService = AtmServiceFactory.createDefault();
         // Inicializa a camada de Apresentação de forma segura na Event Dispatch Thread
         // (EDT)
         SwingUtilities.invokeLater(() -> {
