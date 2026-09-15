@@ -7,6 +7,7 @@ import com.fiap.bank.atm.domain.exception.DailyLimitExceededException;
 import com.fiap.bank.atm.domain.exception.InsufficientFundsException;
 import com.fiap.bank.atm.domain.exception.InvalidPinException;
 import com.fiap.bank.atm.domain.model.Account;
+import com.fiap.bank.atm.application.dto.AccountInfoDTO;
 import com.fiap.bank.atm.domain.model.Transaction;
 
 import javax.swing.*;
