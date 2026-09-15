@@ -13,12 +13,20 @@ public final class DatabaseSetup {
     }
 
     public static void criarTabelas() {
+        // Estende o schema sugerido no Anexo 7.2 do checkpoint (que só previa
+        // id/agency/number/balance/status) com as colunas que a entidade
+        // Account de fato usa: pin, limite diário, total sacado hoje e
+        // tentativas falhas. Sem elas, autenticação e limite diário não
+        // sobreviveriam a um restart.
         String sqlAccount = """
                 CREATE TABLE IF NOT EXISTS tb_account (
                     id VARCHAR(36) PRIMARY KEY,
-                    agency VARCHAR(10) NOT NULL,
-                    number VARCHAR(20) NOT NULL,
+                    number VARCHAR(20) NOT NULL UNIQUE,
+                    pin VARCHAR(4) NOT NULL,
                     balance DECIMAL(15, 2) NOT NULL,
+                    daily_withdrawal_limit DECIMAL(15, 2) NOT NULL,
+                    total_withdrawn_today DECIMAL(15, 2) NOT NULL,
+                    failed_attempts INTEGER NOT NULL,
                     status VARCHAR(20) NOT NULL
                 );""";
 
@@ -28,6 +36,7 @@ public final class DatabaseSetup {
                     account_id VARCHAR(36) NOT NULL,
                     type VARCHAR(20) NOT NULL,
                     amount DECIMAL(15, 2) NOT NULL,
+                    description VARCHAR(255),
                     created_at TIMESTAMP NOT NULL,
                     FOREIGN KEY (account_id) REFERENCES tb_account(id)
                 );""";

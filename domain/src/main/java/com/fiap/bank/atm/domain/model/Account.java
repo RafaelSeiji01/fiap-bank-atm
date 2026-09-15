@@ -20,19 +20,32 @@ public class Account extends BaseEntity {
     private final List<Transaction> transactions;
 
     public Account(UUID id, String accountNumber, String pin, Money initialBalance, Money dailyWithdrawalLimit) {
+        this(id, accountNumber, pin, initialBalance, dailyWithdrawalLimit, Money.ZERO, false, 0);
+    }
+
+    /**
+     * Reidrata uma conta a partir do estado persistido (usado pelo
+     * repositório JDBC), sem passar pelas regras de abertura de conta nova.
+     */
+    public Account(UUID id, String accountNumber, String pin, Money balance, Money dailyWithdrawalLimit,
+            Money totalWithdrawnToday, boolean blocked, int failedAttempts) {
         super(id);
         this.accountNumber = Objects.requireNonNull(accountNumber, "Account number cannot be null");
         this.pin = Objects.requireNonNull(pin, "PIN cannot be null");
-        this.balance = Objects.requireNonNull(initialBalance, "Initial balance cannot be null");
+        this.balance = Objects.requireNonNull(balance, "Balance cannot be null");
         this.dailyWithdrawalLimit = Objects.requireNonNull(dailyWithdrawalLimit, "Daily limit cannot be null");
-        this.totalWithdrawnToday = Money.ZERO;
-        this.blocked = false;
-        this.failedAttempts = 0;
+        this.totalWithdrawnToday = Objects.requireNonNull(totalWithdrawnToday, "Total withdrawn cannot be null");
+        this.blocked = blocked;
+        this.failedAttempts = failedAttempts;
         this.transactions = new ArrayList<>();
     }
 
     public String getAccountNumber() {
         return accountNumber;
+    }
+
+    public String getPin() {
+        return pin;
     }
 
     public Money getBalance() {
