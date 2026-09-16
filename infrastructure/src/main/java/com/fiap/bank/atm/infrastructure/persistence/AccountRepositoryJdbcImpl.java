@@ -85,33 +85,70 @@ public class AccountRepositoryJdbcImpl implements AccountRepository {
 
     @Override
     public void salvar(Account entidade) {
+        salvarAtomico(entidade);
+    }
+
+    @Override
+    public void salvarTransferencia(Account origem, Account destino) {
+        salvarAtomico(origem, destino);
+    }
+
+    private void salvarAtomico(Account... contas) {
         Connection conn = DatabaseConnectionFactory.getConnection();
         try {
-            upsertAccount(conn, entidade);
-            reescreverTransacoes(conn, entidade);
+            conn.setAutoCommit(false);
+            for (Account conta : contas) {
+                upsertAccount(conn, conta);
+                salvarTransacoes(conn, conta);
+            }
+            conn.commit();
+        } catch (SQLException e) {
+            rollback(conn, e);
+            throw new RuntimeException("Erro ao salvar conta(s) no banco de dados.", e);
         } finally {
             DatabaseConnectionFactory.closeConnection(conn);
         }
     }
 
+    private void rollback(Connection conn, SQLException original) {
+        try {
+            conn.rollback();
+        } catch (SQLException rollbackError) {
+            original.addSuppressed(rollbackError);
+        }
+    }
+
     @Override
     public void remover(UUID id) {
-        String sql = "DELETE FROM tb_account WHERE id = ?";
         Connection conn = DatabaseConnectionFactory.getConnection();
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, id.toString());
-            stmt.executeUpdate();
+        try {
+            conn.setAutoCommit(false);
+            try (PreparedStatement transactions = conn.prepareStatement(
+                    "DELETE FROM tb_transaction WHERE account_id = ?");
+                    PreparedStatement account = conn.prepareStatement(
+                            "DELETE FROM tb_account WHERE id = ?")) {
+                transactions.setString(1, id.toString());
+                transactions.executeUpdate();
+                account.setString(1, id.toString());
+                account.executeUpdate();
+            }
+            conn.commit();
         } catch (SQLException e) {
+            rollback(conn, e);
             throw new RuntimeException("Erro ao remover conta.", e);
         } finally {
             DatabaseConnectionFactory.closeConnection(conn);
         }
     }
 
-    private void upsertAccount(Connection conn, Account account) {
-        String sql = "INSERT OR REPLACE INTO tb_account "
+    private void upsertAccount(Connection conn, Account account) throws SQLException {
+        String sql = "INSERT INTO tb_account "
                 + "(id, number, pin, balance, daily_withdrawal_limit, total_withdrawn_today, failed_attempts, status) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?) "
+                + "ON CONFLICT(id) DO UPDATE SET number=excluded.number, pin=excluded.pin, "
+                + "balance=excluded.balance, daily_withdrawal_limit=excluded.daily_withdrawal_limit, "
+                + "total_withdrawn_today=excluded.total_withdrawn_today, "
+                + "failed_attempts=excluded.failed_attempts, status=excluded.status";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, account.getId().toString());
             stmt.setString(2, account.getAccountNumber());
@@ -122,25 +159,13 @@ public class AccountRepositoryJdbcImpl implements AccountRepository {
             stmt.setInt(7, account.getFailedAttempts());
             stmt.setString(8, account.isBlocked() ? "BLOCKED" : "ACTIVE");
             stmt.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao salvar conta.", e);
         }
     }
 
-    // Regrava o extrato inteiro da conta a cada salvamento: mais simples e
-    // seguro do que rastrear individualmente quais transações já foram
-    // persistidas, e o volume de dados aqui não justifica a otimização.
-    private void reescreverTransacoes(Connection conn, Account account) {
-        String delete = "DELETE FROM tb_transaction WHERE account_id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(delete)) {
-            stmt.setString(1, account.getId().toString());
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao limpar o extrato antigo da conta.", e);
-        }
-
+    // Transações já gravadas mantêm o mesmo ID; só as novas são inseridas.
+    private void salvarTransacoes(Connection conn, Account account) throws SQLException {
         String insert = "INSERT INTO tb_transaction (id, account_id, type, amount, description, created_at) "
-                + "VALUES (?, ?, ?, ?, ?, ?)";
+                + "VALUES (?, ?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING";
         try (PreparedStatement stmt = conn.prepareStatement(insert)) {
             for (Transaction tx : account.getTransactions()) {
                 stmt.setString(1, tx.getId().toString());
@@ -152,8 +177,6 @@ public class AccountRepositoryJdbcImpl implements AccountRepository {
                 stmt.addBatch();
             }
             stmt.executeBatch();
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao salvar o extrato da conta.", e);
         }
     }
 

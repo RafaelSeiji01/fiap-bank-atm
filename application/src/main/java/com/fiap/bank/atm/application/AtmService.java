@@ -1,12 +1,11 @@
 package com.fiap.bank.atm.application;
 
+import com.fiap.bank.atm.application.dto.AccountInfoDTO;
 import com.fiap.bank.atm.application.dto.TransactionDTO;
 import com.fiap.bank.atm.domain.exception.InvalidPinException;
 import com.fiap.bank.atm.domain.model.Account;
 import com.fiap.bank.atm.domain.model.Money;
 import com.fiap.bank.atm.domain.repository.AccountRepository;
-//iport para o dto e nao vazr o account
-import com.fiap.bank.atm.application.dto.AccountInfoDTO;
 import java.util.List;
 
 public class AtmService {
@@ -17,34 +16,28 @@ public class AtmService {
         this.accountRepository = accountRepository;
     }
 
-
-    //metodo com dto
     public AccountInfoDTO authenticate(String accountNumber, String pin) {
         Account account = accountRepository.findByAccountNumber(accountNumber)
                 .orElseThrow(() -> new InvalidPinException("Conta não encontrada."));
 
         try {
             account.authenticate(pin);
-            currentAccount = account; // Mantém a entidade no serviço
-
-            // Faz a conversão direto no método:
-            String balance = account.getBalance().format();
-            String limit = account.getDailyWithdrawalLimit().minus(account.getTotalWithdrawnToday()).format();
-
-            List<TransactionDTO> statement = account.getTransactions().stream()
-                    .map(tx -> new TransactionDTO(
-                            tx.getTimestamp().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM HH:mm")),
-                            tx.getType().getDescription(),
-                            tx.getAmount().format()
-                    ))
-                    .collect(java.util.stream.Collectors.toList());
-
-            return new AccountInfoDTO(account.getAccountNumber(), balance, limit, statement);
-
-        } catch (RuntimeException e) {
+        } finally {
+            // Tanto o bloqueio quanto o reset de tentativas devem sobreviver ao restart.
             accountRepository.salvar(account);
-            throw e;
         }
+        currentAccount = account;
+
+        String balance = account.getBalance().format();
+        String limit = account.getDailyWithdrawalLimit().minus(account.getTotalWithdrawnToday()).format();
+        List<TransactionDTO> statement = account.getTransactions().stream()
+                .map(tx -> new TransactionDTO(
+                        tx.getTimestamp().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM HH:mm")),
+                        tx.getType().getDescription(),
+                        tx.getAmount().format()))
+                .toList();
+
+        return new AccountInfoDTO(account.getAccountNumber(), balance, limit, statement);
     }
 
     public void withdraw(double amount) {
@@ -67,8 +60,7 @@ public class AtmService {
 
         currentAccount.transfer(targetAccount, Money.of(amount));
 
-        accountRepository.salvar(currentAccount);
-        accountRepository.salvar(targetAccount);
+        accountRepository.salvarTransferencia(currentAccount, targetAccount);
     }
 
     public void logout() {

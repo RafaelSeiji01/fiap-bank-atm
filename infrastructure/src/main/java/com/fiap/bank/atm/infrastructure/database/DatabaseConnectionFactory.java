@@ -3,6 +3,7 @@ package com.fiap.bank.atm.infrastructure.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.PreparedStatement;
 
 /**
  * Fábrica de conexões com o arquivo SQLite. Centraliza a URL de conexão e o
@@ -11,14 +12,22 @@ import java.sql.SQLException;
  */
 public final class DatabaseConnectionFactory {
 
-    private static final String URL = "jdbc:sqlite:fiapbank.db";
+    private static final String DEFAULT_DATABASE = "fiapbank.db";
 
     private DatabaseConnectionFactory() {
     }
 
     public static Connection getConnection() {
         try {
-            return DriverManager.getConnection(URL);
+            String path = System.getProperty("fiapbank.db.path", DEFAULT_DATABASE);
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + path);
+            try (PreparedStatement pragma = connection.prepareStatement("PRAGMA foreign_keys = ON")) {
+                pragma.execute();
+            } catch (SQLException e) {
+                connection.close();
+                throw e;
+            }
+            return connection;
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao conectar com o banco de dados SQLite.", e);
         }

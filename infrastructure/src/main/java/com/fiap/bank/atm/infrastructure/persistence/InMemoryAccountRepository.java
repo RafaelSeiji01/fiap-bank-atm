@@ -69,6 +69,12 @@ public class InMemoryAccountRepository implements AccountRepository {
         }
 
         @Override
+        public void salvarTransferencia(Account origem, Account destino) {
+                accounts.put(origem.getAccountNumber(), origem);
+                accounts.put(destino.getAccountNumber(), destino);
+        }
+
+        @Override
         public void remover(UUID id) {
                 accounts.values().removeIf(account -> account.getId().equals(id));
         }

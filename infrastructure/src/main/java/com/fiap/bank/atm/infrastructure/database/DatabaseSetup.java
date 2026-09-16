@@ -1,7 +1,7 @@
 package com.fiap.bank.atm.infrastructure.database;
 
 import java.sql.Connection;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
 
 /**
  * Cria o schema do banco (tabelas tb_account e tb_transaction) caso ainda
@@ -42,9 +42,10 @@ public final class DatabaseSetup {
                 );""";
 
         Connection conn = DatabaseConnectionFactory.getConnection();
-        try (Statement stmt = conn.createStatement()) {
-            stmt.execute(sqlAccount);
-            stmt.execute(sqlTransaction);
+        try (PreparedStatement accounts = conn.prepareStatement(sqlAccount);
+                PreparedStatement transactions = conn.prepareStatement(sqlTransaction)) {
+            accounts.execute();
+            transactions.execute();
         } catch (Exception e) {
             throw new RuntimeException("Erro ao criar as tabelas do banco de dados.", e);
         } finally {

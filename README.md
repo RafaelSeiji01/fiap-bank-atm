@@ -80,7 +80,8 @@ com.fiap.bank.atm
 │
 ├── infrastructure                  # Camada de Infraestrutura (Persistência e Recursos Externos)
 │   └── persistence
-│       └── InMemoryAccountRepository.java # Implementação em memória com dados de teste (Seed)
+│       ├── AccountRepositoryJdbcImpl.java # Persistência SQLite via JDBC
+│       └── InMemoryAccountRepository.java # Implementação alternativa em memória
 │
 └── presentation                    # Camada de Apresentação (UI / Swing)
     ├── AtmFrame.java               # Janela principal do ATM com FlatLaf Dark Theme
@@ -129,7 +130,7 @@ A interface gráfica opera sobre uma **Máquina de Estados Finitos (FSM)** repre
 
 ## 🔑 Contas Pré-cadastradas para Teste (Seed Data)
 
-Ao iniciar a aplicação, as seguintes contas de teste são carregadas automaticamente em memória pelo `InMemoryAccountRepository`:
+Na primeira execução, o `AccountRepositoryJdbcImpl` grava as contas de teste no arquivo SQLite `fiapbank.db`. Saldos, tentativas de PIN e extratos permanecem disponíveis após reiniciar o programa:
 
 | Número da Conta | PIN (Senha) | Saldo Inicial | Limite Diário Saque | Histórico Inicial |
 | :---: | :---: | :---: | :---: | :--- |
@@ -146,6 +147,7 @@ Ao iniciar a aplicação, as seguintes contas de teste são carregadas automatic
 - **FlatLaf 3.5.1 (`com.formdev:flatlaf`)**: Look & Feel moderno e escuro para interfaces Swing.
 - **JUnit 5 (5.10.2)**: Framework de testes unitários.
 - **Apache Maven**: Gerenciamento de dependências e build.
+- **SQLite JDBC**: Persistência local com `PreparedStatement` e transações atômicas.
 
 ---
 
@@ -164,9 +166,10 @@ Ao iniciar a aplicação, as seguintes contas de teste são carregadas automatic
    cd fiap-bank-atm
    ```
 
-2. Compile e execute a aplicação via Maven:
+2. Compile, rode os testes e instale os módulos Maven; depois execute a apresentação:
    ```bash
-   mvn clean compile exec:java
+   mvn -pl presentation -am install
+   mvn -pl presentation exec:java -Dexec.mainClass=com.fiap.bank.atm.presentation.AtmApplication
    ```
 
 ---
@@ -185,8 +188,7 @@ run.bat
 
 1. Abra a IDE e selecione **Open Project** apontando para a pasta raiz do projeto (onde se encontra o `pom.xml`).
 2. Aguarde a sincronização das dependências Maven (`flatlaf`, `junit-jupiter`).
-3. Localize e execute a classe principal:  
-   [AtmApplication.java](file:///Users/eduardo.ramos/workspace/fiap/engenharia-de-software/2026/fiap-bank-atm/CP4/fiap-bank-atm/src/main/java/com/fiap/bank/atm/AtmApplication.java) (`com.fiap.bank.atm.AtmApplication`).
+3. Localize e execute a classe principal: `com.fiap.bank.atm.presentation.AtmApplication`, no módulo `presentation`.
 
 ---
 
@@ -215,3 +217,5 @@ mvn test
 
 Desenvolvido para fins acadêmicos como parte do curso de **Engenharia de Software (2026)** da **FIAP**.  
 Prof. Eduardo Ramos.
+
+Participante: Cesar Aaron Herrera — RM565398.
