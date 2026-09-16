@@ -2,6 +2,7 @@ package com.fiap.bank.atm.infrastructure.database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  * Cria o schema do banco (tabelas tb_account e tb_transaction) caso ainda
@@ -27,7 +28,8 @@ public final class DatabaseSetup {
                     daily_withdrawal_limit DECIMAL(15, 2) NOT NULL,
                     total_withdrawn_today DECIMAL(15, 2) NOT NULL,
                     failed_attempts INTEGER NOT NULL,
-                    status VARCHAR(20) NOT NULL
+                    status VARCHAR(20) NOT NULL,
+                     last_withdrawal_date VARCHAR(10)
                 );""";
 
         String sqlTransaction = """
@@ -46,10 +48,32 @@ public final class DatabaseSetup {
                 PreparedStatement transactions = conn.prepareStatement(sqlTransaction)) {
             accounts.execute();
             transactions.execute();
+            migrarColunaDataControleSaque(conn);
         } catch (Exception e) {
             throw new RuntimeException("Erro ao criar as tabelas do banco de dados.", e);
         } finally {
             DatabaseConnectionFactory.closeConnection(conn);
         }
+    }
+    private static void migrarColunaDataControleSaque(Connection conn) throws java.sql.SQLException {
+        if (colunaExiste(conn, "tb_account", "last_withdrawal_date")) {
+            return;
+        }
+        try (PreparedStatement alter = conn
+                .prepareStatement("ALTER TABLE tb_account ADD COLUMN last_withdrawal_date VARCHAR(10)")) {
+            alter.execute();
+        }
+    }
+
+    private static boolean colunaExiste(Connection conn, String tabela, String coluna) throws java.sql.SQLException {
+        try (PreparedStatement pragma = conn.prepareStatement("PRAGMA table_info(" + tabela + ")");
+             ResultSet rs = pragma.executeQuery()) {
+            while (rs.next()) {
+                if (coluna.equalsIgnoreCase(rs.getString("name"))) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

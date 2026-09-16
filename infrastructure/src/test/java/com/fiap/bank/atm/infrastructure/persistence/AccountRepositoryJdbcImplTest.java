@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -81,5 +82,26 @@ class AccountRepositoryJdbcImplTest {
         Account reloaded = repository.findByAccountNumber("12345").orElseThrow();
         assertEquals(Money.of(5000), reloaded.getBalance());
         assertEquals(3, reloaded.getTransactions().size());
+    }
+    @Test
+    void controleDeSaqueDiarioSobrevivaAoRestartEZeraNoDiaSeguinte() {
+        AccountRepositoryJdbcImpl repository = new AccountRepositoryJdbcImpl();
+        Account conta = repository.findByAccountNumber("12345").orElseThrow(); // limite diário: 1500,00
+
+        conta.withdraw(Money.of(300)); // saque de hoje
+        repository.salvar(conta);
+
+        AccountRepositoryJdbcImpl restarted = new AccountRepositoryJdbcImpl();
+        Account recarregada = restarted.findByAccountNumber("12345").orElseThrow();
+
+        assertEquals(Money.of(300), recarregada.getTotalWithdrawnToday());
+
+        Account contaDeOntem = new Account(recarregada.getId(), recarregada.getAccountNumber(), recarregada.getPin(),
+                recarregada.getBalance(), recarregada.getDailyWithdrawalLimit(), Money.of(300), false, 0,
+                LocalDate.now().minusDays(1));
+
+        assertEquals(Money.ZERO, contaDeOntem.getTotalWithdrawnToday());
+        contaDeOntem.withdraw(Money.of(1500));
+        assertEquals(Money.of(1500), contaDeOntem.getTotalWithdrawnToday());
     }
 }

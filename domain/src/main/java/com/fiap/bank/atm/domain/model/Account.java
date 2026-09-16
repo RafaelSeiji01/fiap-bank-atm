@@ -1,6 +1,7 @@
 package com.fiap.bank.atm.domain.model;
 
 import com.fiap.bank.atm.domain.exception.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,6 +16,7 @@ public class Account extends BaseEntity {
     private Money balance;
     private final Money dailyWithdrawalLimit;
     private Money totalWithdrawnToday;
+    private LocalDate lastWithdrawalDate;
     private boolean blocked;
     private int failedAttempts;
     private final List<Transaction> transactions;
@@ -39,6 +41,11 @@ public class Account extends BaseEntity {
         this.failedAttempts = failedAttempts;
         this.transactions = new ArrayList<>();
     }
+    public Account(UUID id, String accountNumber, String pin, Money balance, Money dailyWithdrawalLimit,
+                   Money totalWithdrawnToday, boolean blocked, int failedAttempts, LocalDate lastWithdrawalDate) {
+        this(id, accountNumber, pin, balance, dailyWithdrawalLimit, totalWithdrawnToday, blocked, failedAttempts);
+        this.lastWithdrawalDate = lastWithdrawalDate;
+    }
 
     public String getAccountNumber() {
         return accountNumber;
@@ -57,7 +64,12 @@ public class Account extends BaseEntity {
     }
 
     public Money getTotalWithdrawnToday() {
+        resetarControleSeVirouODia();
         return totalWithdrawnToday;
+    }
+
+    public LocalDate getLastWithdrawalDate() {
+        return lastWithdrawalDate;
     }
 
     public boolean isBlocked() {
@@ -92,6 +104,9 @@ public class Account extends BaseEntity {
     }
 
     public void withdraw(Money amount) {
+
+        resetarControleSeVirouODia();
+
         if (blocked) {
             throw new AccountBlockedException("Operação não permitida: conta bloqueada.");
         }
@@ -113,8 +128,15 @@ public class Account extends BaseEntity {
 
         balance = balance.minus(amount);
         totalWithdrawnToday = totalWithdrawnToday.plus(amount);
+        lastWithdrawalDate = LocalDate.now();
 
         transactions.add(new Transaction(UUID.randomUUID(), TransactionType.WITHDRAWAL, amount, "Saque eletrônico"));
+    }
+    private void resetarControleSeVirouODia() {
+        LocalDate hoje = LocalDate.now();
+        if (lastWithdrawalDate == null || !lastWithdrawalDate.isEqual(hoje)) {
+            totalWithdrawnToday = Money.ZERO;
+        }
     }
 
     public void deposit(Money amount) {

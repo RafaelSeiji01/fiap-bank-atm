@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ import java.util.UUID;
 public class AccountRepositoryJdbcImpl implements AccountRepository {
 
     private static final String SELECT_ACCOUNT_COLUMNS = "id, number, pin, balance, daily_withdrawal_limit, "
-            + "total_withdrawn_today, failed_attempts, status";
+            + "total_withdrawn_today, failed_attempts, status, last_withdrawal_date";
 
     public AccountRepositoryJdbcImpl() {
         DatabaseSetup.criarTabelas();
@@ -143,12 +144,13 @@ public class AccountRepositoryJdbcImpl implements AccountRepository {
 
     private void upsertAccount(Connection conn, Account account) throws SQLException {
         String sql = "INSERT INTO tb_account "
-                + "(id, number, pin, balance, daily_withdrawal_limit, total_withdrawn_today, failed_attempts, status) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?) "
+                + "(id, number, pin, balance, daily_withdrawal_limit, total_withdrawn_today, failed_attempts, status, last_withdrawal_date) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) "
                 + "ON CONFLICT(id) DO UPDATE SET number=excluded.number, pin=excluded.pin, "
                 + "balance=excluded.balance, daily_withdrawal_limit=excluded.daily_withdrawal_limit, "
                 + "total_withdrawn_today=excluded.total_withdrawn_today, "
-                + "failed_attempts=excluded.failed_attempts, status=excluded.status";
+                + "failed_attempts=excluded.failed_attempts, status=excluded.status, + "
+                 +"last_withdrawal_date=excluded.last_withdrawal_date" ;
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, account.getId().toString());
             stmt.setString(2, account.getAccountNumber());
@@ -158,6 +160,11 @@ public class AccountRepositoryJdbcImpl implements AccountRepository {
             stmt.setBigDecimal(6, account.getTotalWithdrawnToday().getAmount());
             stmt.setInt(7, account.getFailedAttempts());
             stmt.setString(8, account.isBlocked() ? "BLOCKED" : "ACTIVE");
+            if (account.getLastWithdrawalDate() != null) {
+                        stmt.setString(9, account.getLastWithdrawalDate().toString());
+                   } else {
+                        stmt.setNull(9, java.sql.Types.VARCHAR);
+                    }
             stmt.executeUpdate();
         }
     }
@@ -182,6 +189,9 @@ public class AccountRepositoryJdbcImpl implements AccountRepository {
 
     private Account mapAccount(ResultSet rs, Connection conn) throws SQLException {
         UUID id = UUID.fromString(rs.getString("id"));
+        String dataSalva = rs.getString("last_withdrawal_date");
+        LocalDate lastWithdrawalDate = dataSalva != null ? LocalDate.parse(dataSalva) : null;
+
         Account account = new Account(
                 id,
                 rs.getString("number"),
@@ -191,6 +201,7 @@ public class AccountRepositoryJdbcImpl implements AccountRepository {
                 Money.of(rs.getBigDecimal("total_withdrawn_today")),
                 "BLOCKED".equals(rs.getString("status")),
                 rs.getInt("failed_attempts"));
+                rs.getInt("failed_attempts"),lastWithdrawalDate);
 
         for (Transaction tx : buscarTransacoes(conn, id)) {
             account.seedTransaction(tx);
