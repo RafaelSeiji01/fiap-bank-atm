@@ -218,4 +218,9 @@ mvn test
 Desenvolvido para fins acadêmicos como parte do curso de **Engenharia de Software (2026)** da **FIAP**.  
 Prof. Eduardo Ramos.
 
-Participante: Cesar Aaron Herrera — RM565398.
+**Integrantes do grupo:**
+- Cesar Aaron Herrera — RM565398
+- Kauê Soares Madarazzo — RM562100
+- Nicolas Mendes dos Santos — RM566290
+- Rafael Seiji Aoke Arakaki — RM561993
+- Rafael Yuji Nakaya — RM563624
